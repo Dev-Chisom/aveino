@@ -4,10 +4,16 @@
     <h1>{{ name }}</h1>
     <img src="../assets/images/aveon.png" class="img-1" alt="aveon" />
     <div class="socials">
-      <i class="fab fa-instagram"></i>
-      <i class="fab fa-twitter-square"></i>
-      <i class="fab fa-snapchat-square"></i>
-      <i class="fas fa-envelope-square"></i>
+      <a :href="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a :href="twitter" target="_blank"
+        ><i class="fab fa-twitter-square"></i
+      ></a>
+      <a :href="snapchat" target="_blank"
+        ><i class="fab fa-snapchat-square"></i
+      ></a>
+      <a :href="email" target="_blank"
+        ><i class="fas fa-envelope-square"></i
+      ></a>
     </div>
 
     <nav>
@@ -42,7 +48,7 @@ export default {
       lists: [
         { id: 1, name: 'Home' },
         { id: 2, name: 'About' },
-        { id: 3, name: '', src: './images/girl.png' },
+        { id: 3, name: '', src: '/girl.png' },
         { id: 4, name: 'Gallery' },
         {
           name: 'Contact',
@@ -53,8 +59,9 @@ export default {
   mounted() {
     axios
       .get('https://hirng-x2021.glitch.me/api')
-      .then((response) => console.log(response.data))
-      .then((data) => {
+      // .then((response) => console.log(response.data))
+      .then(({ data }) => {
+        console.log(data);
         this.info = data;
         this.name = data.name;
         this.twitter = 'https://twitter.com/' + data.social_media.twitter;
@@ -63,7 +70,6 @@ export default {
         this.instagram =
           'https://www.instagram.com/' + data.social_media.instagram;
         this.email = 'mailto:' + data.social_media.email;
-        // console.log(data);
       });
   },
 };
@@ -96,13 +102,13 @@ ul {
   list-style: none;
   margin-top: 1.5rem;
 }
-a {
+nav a {
   text-decoration: none;
   color: #fff;
-  padding: 2rem;
+  padding: 1.5rem;
   font-weight: 300;
   text-transform: uppercase;
-  letter-spacing: 0.3rem;
+  letter-spacing: 0.2rem;
 }
 /* .model img {
   position: fixed;
@@ -121,8 +127,19 @@ a {
   display: flex;
   flex-direction: column;
 }
-.socials i {
+.socials a {
+  color: #fff;
+  text-decoration: none;
   padding: 0.5rem;
   font-size: 2rem;
+}
+.socials a:hover {
+  background-color: #fff;
+  color: #bd0f4d;
+}
+
+.socials a:hover:after {
+  transition: scale(1);
+  opacity: 1;
 }
 </style>
