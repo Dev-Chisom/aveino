@@ -18,7 +18,7 @@
 
     <nav>
       <ul>
-        <li v-for="(list, index) in lists" :key="index">
+        <li class="mb" v-for="(list, index) in lists" :key="index">
           <span v-if="list.src">
             <img :src="list.src" alt="girl" />
           </span>
@@ -76,6 +76,9 @@ export default {
 </script>
 
 <style>
+.mb {
+  margin-bottom: 1rem;
+}
 .content {
   position: relative;
 }
@@ -90,7 +93,8 @@ export default {
   display: block;
   margin: 3rem auto;
   transition: 0.4s ease-out;
-  box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 3px 6px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.3); */
 }
 .content .img-1:hover {
   transform: translateY(20px);
@@ -109,17 +113,27 @@ nav a {
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
+  position: relative;
 }
-/* .model img {
-  position: fixed;
-  border-radius: 50%;
+
+nav a::after {
+  bottom: -4px;
+  content: '';
+  display: block;
+  height: 2px;
+  left: 0;
   position: absolute;
-  bottom: -40px;
-  right: 40rem;
-  height: 100px;
-  width: 100px;
-  object-fit: cover;
-} */
+  background: #fff;
+  opacity: 0.6;
+  transition: width 0.3s ease 0s, opacity 0.3s ease 0s;
+  width: 0;
+}
+
+nav a:hover::after {
+  width: 100%;
+  opacity: 0.9;
+}
+
 .socials {
   position: fixed;
   top: 220px;
@@ -141,5 +155,30 @@ nav a {
 .socials a:hover:after {
   transition: scale(1);
   opacity: 1;
+}
+
+@media screen and (max-width: 764px) {
+  .content h1 {
+    font-size: 1.2rem;
+    margin: 1rem;
+    letter-spacing: 0.3rem;
+  }
+  .content .img-1 {
+    width: 50%;
+  }
+
+  ul {
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  nav a {
+    padding-bottom: 1.5rem;
+  }
+  .socials {
+    top: 180px;
+  }
+  .socials a {
+    font-size: 1rem;
+  }
 }
 </style>
